@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>EduNet Quiz</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+	<header class="app-header" role="banner">
+		<h1 class="app-title">EduNet Quiz</h1>
+		<nav class="header-actions" aria-label="App actions">
+			<button id="themeToggle" class="btn ghost" aria-pressed="false" title="Toggle theme">🌗</button>
+			<button id="resetApp" class="btn ghost" title="Reset progress">↺</button>
+		</nav>
+	</header>
+
+	<main id="main" class="app-main" role="main">
+		<section id="screen-start" class="screen active" aria-labelledby="startHeading">
+			<h2 id="startHeading">Start a Quiz</h2>
+			<form id="startForm" class="start-form">
+				<label for="playerName">Your Name</label>
+				<input id="playerName" name="playerName" type="text" placeholder="e.g. Alex" />
+				<label for="category">Category</label>
+				<select id="category" name="category">
+					<option value="any">Any Aptitude</option>
+					<option value="time_work">Time & Work</option>
+					<option value="speed_distance">Speed & Distance</option>
+					<option value="profit_loss">Profit & Loss</option>
+					<option value="calendar">Calendar</option>
+					<option value="simple_interest">Simple Interest</option>
+					<option value="compound_interest">Compound Interest</option>
+				</select>
+
+				<label for="difficulty">Difficulty</label>
+				<select id="difficulty" name="difficulty">
+					<option value="any">Any</option>
+					<option value="easy">Easy</option>
+					<option value="medium">Medium</option>
+					<option value="hard">Hard</option>
+				</select>
+
+				<label for="amount">Number of Questions</label>
+				<input id="amount" name="amount" type="number" min="5" max="20" value="10" />
+
+				<label for="timePer">Time per Question (sec)</label>
+				<input id="timePer" name="timePer" type="number" min="5" max="90" value="20" />
+
+				<div class="form-row">
+					<button id="startBtn" class="btn primary" type="submit">Start Quiz</button>
+				</div>
+			</form>
+		</section>
+
+		<section id="screen-quiz" class="screen" aria-live="polite" aria-labelledby="quizHeading">
+			<div class="quiz-header">
+				<h2 id="quizHeading">Question <span id="qIndex">1</span>/<span id="qTotal">10</span></h2>
+				<div class="timer" role="timer" aria-live="assertive">
+					<div class="timer-bar" id="timerBar"></div>
+					<span id="timerText" class="timer-text" aria-label="seconds left">20</span>
+				</div>
+			</div>
+
+			<div id="questionText" class="question" tabindex="0"></div>
+
+			<form id="answers" class="answers" role="radiogroup" aria-label="Answer choices"></form>
+
+			<div class="quiz-actions">
+				<button id="submitAnswer" class="btn primary" disabled>Submit</button>
+				<button id="hintBtn" class="btn" disabled>Hint</button>
+				<button id="skipBtn" class="btn" disabled>Skip</button>
+				<button id="pauseBtn" class="btn" disabled>Pause</button>
+				<button id="nextQuestion" class="btn" disabled>Next</button>
+			</div>
+
+			<div id="feedback" class="feedback" aria-live="polite"></div>
+		</section>
+
+		<section id="screen-results" class="screen" aria-labelledby="resultsHeading">
+			<h2 id="resultsHeading">Your Results</h2>
+			<div class="score">
+				<div class="score-number" id="scoreNumber">0/0</div>
+				<div class="score-bar">
+					<div class="score-fill" id="scoreFill" style="width:0%"></div>
+				</div>
+			</div>
+
+			<div id="breakdown" class="breakdown" aria-live="polite"></div>
+
+			<div class="leaderboard">
+				<h3>Local Leaderboard</h3>
+				<ol id="leaderboardList"></ol>
+			</div>
+
+			<div class="results-actions">
+				<button id="reviewAnswers" class="btn">Review Answers</button>
+				<button id="playAgain" class="btn primary">Play Again</button>
+			</div>
+		</section>
+
+		<section id="screen-review" class="screen" aria-labelledby="reviewHeading">
+			<h2 id="reviewHeading">Review</h2>
+			<ol id="reviewList" class="review-list"></ol>
+			<div class="results-actions">
+				<button id="backToResults" class="btn">Back</button>
+			</div>
+		</section>
+	</main>
+
+	<footer class="app-footer" role="contentinfo">
+		<div class="badges" id="badges" aria-live="polite" aria-label="Achievements"></div>
+		<small>Aptitude questions are generated on-device (no external API required)</small>
+	</footer>
+
+	<script src="app.js" defer></script>
+</body>
+</html>
